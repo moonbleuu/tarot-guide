@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>塔罗指南 — 神秘之境</title>
+<meta name="description" content="以韦特塔罗为蓝本，探索 22 张大阿卡那的奥秘。每日抽牌、卡面解读、正逆位含义。">
+<meta name="theme-color" content="#0a0518">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="塔罗指南">
+<link rel="manifest" href="manifest.json">
+<!-- Social sharing -->
+<meta property="og:title" content="塔罗指南 — 神秘之境">
+<meta property="og:description" content="香芋紫雾中，开启塔罗智慧之旅。每日抽牌、韦特牌详细解读。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0518'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='%23C9A96E'%3E✦%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0518'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='%23C9A96E'%3E✦%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<style>
+/* ========== Reset & Base ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Serif SC', 'Georgia', 'SimSun', serif;
+  background: #0a0518;
+  color: #c8bfd4;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ========== Texture Overlays ========== */
+/* Vignette */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(2,0,8,0.55) 100%);
+}
+/* Parchment grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* ========== Gold Accents ========== */
+.gold-text { color: #C9A96E; }
+.gold-border { border-color: rgba(201,169,110,0.3); }
+.glow-gold { box-shadow: 0 0 30px rgba(201,169,110,0.08); }
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0a0518; }
+::-webkit-scrollbar-thumb { background: #2a1a45; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #C9A96E; }
+
+/* ========== Typography ========== */
+h1, h2, h3 { font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif; font-weight: 400; }
+h2 {
+  font-size: 2.4rem;
+  text-align: center;
+  margin-bottom: 2.2rem;
+  background: linear-gradient(135deg, #E8D5B5, #C9A96E, #A8874A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  letter-spacing: 0.12em;
+}
+h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A96E, transparent);
+  margin: 0.8rem auto 0;
+}
+h2::before {
+  content: '✦';
+  display: block;
+  font-size: 0.8rem;
+  color: #C9A96E;
+  opacity: 0.4;
+  margin-bottom: 0.3rem;
+  -webkit-text-fill-color: initial;
+  background: none;
+}
+
+/* ========== Header / Nav ========== */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0.7rem 2rem;
+  background: rgba(8, 3, 20, 0.6);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header.scrolled { background: rgba(6, 2, 16, 0.85); border-bottom-color: rgba(201, 169, 110, 0.04); }
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1.3rem;
+  color: #E8D5B5;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+}
+.logo-icon {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #C9A96E, #A8874A);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #0a0518;
+  box-shadow: 0 0 20px rgba(201, 169, 110, 0.15);
+}
+
+nav { display: flex; gap: 0.1rem; }
+nav a {
+  color: #8b7fa5;
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  transition: all 0.4s;
+  position: relative;
+  letter-spacing: 0.05em;
+}
+nav a:hover { color: #E8D5B5; background: rgba(201, 169, 110, 0.08); }
+nav a.active { color: #C9A96E; background: rgba(201, 169, 110, 0.1); }
+
+/* ========== Hero Section ========== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(180deg, #060216 0%, #0a0518 20%, #0f0820 40%, #120a28 60%, #0e081e 80%, #080418 100%);
+  overflow: hidden;
+  padding: 6rem 2rem 4rem;
+}
+
+/* Starlight - soft, sparse */
+.stars { position: absolute; inset: 0; overflow: hidden; }
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(201, 169, 110, 0.4);
+  box-shadow: 0 0 6px rgba(201, 169, 110, 0.1);
+  animation: twinkle var(--duration, 5s) ease-in-out infinite alternate;
+}
+@keyframes twinkle {
+  0% { opacity: 0.1; transform: scale(0.5); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+/* Crescent Moon - refined with gold glow */
+.moon {
+  position: absolute;
+  top: 6%;
+  right: 10%;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow:
+    30px -8px 0 0 rgba(233, 215, 175, 0.6),
+    30px -8px 50px 20px rgba(201, 169, 110, 0.06);
+  animation: moonGlow 6s ease-in-out infinite alternate;
+}
+@keyframes moonGlow {
+  0% { box-shadow: 30px -8px 0 0 rgba(233, 215, 175, 0.4), 30px -8px 50px 20px rgba(201, 169, 110, 0.04); }
+  100% { box-shadow: 30px -8px 0 0 rgba(233, 215, 175, 0.7), 30px -8px 70px 30px rgba(201, 169, 110, 0.1); }
+}
+
+/* Purple Mist - soft, diffused, low sat */
+.mist {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 50%;
+  pointer-events: none;
+}
+.mist::before, .mist::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 25% 100%, rgba(60, 30, 100, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 75% 100%, rgba(80, 40, 120, 0.08) 0%, transparent 50%);
+  filter: blur(50px);
+  animation: mistWave 10s ease-in-out infinite alternate;
+}
+.mist::after {
+  background: radial-gradient(ellipse at 50% 100%, rgba(201, 169, 110, 0.03) 0%, transparent 50%);
+  animation-duration: 15s;
+  animation-delay: -5s;
+}
+@keyframes mistWave {
+  0% { transform: translateX(-2%) scaleY(0.98); opacity: 0.6; }
+  100% { transform: translateX(2%) scaleY(1.02); opacity: 1; }
+}
+
+/* Gold flowing decorative lines */
+.gold-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.gold-line {
+  position: absolute;
+  fill: none;
+  stroke: rgba(201, 169, 110, 0.08);
+  stroke-width: 0.5;
+  stroke-linecap: round;
+}
+.gold-line.thicker { stroke-width: 0.8; }
+.gold-line-1 { top: 15%; left: 0; width: 300px; height: 200px; }
+.gold-line-2 { bottom: 20%; right: 0; width: 250px; height: 180px; transform: rotate(180deg); }
+
+/* Rune decorations */
+.rune {
+  position: absolute;
+  font-size: 1.6rem;
+  opacity: 0.06;
+  color: #C9A96E;
+  pointer-events: none;
+  z-index: 1;
+  font-family: serif;
+}
+.rune-1 { top: 20%; left: 6%; transform: rotate(-8deg); }
+.rune-2 { top: 60%; left: 4%; transform: rotate(12deg); font-size: 1.2rem; }
+.rune-3 { top: 30%; right: 5%; transform: rotate(15deg); }
+.rune-4 { bottom: 25%; right: 8%; transform: rotate(-5deg); font-size: 1.2rem; }
+.rune-5 { top: 45%; left: 3%; transform: rotate(-3deg); font-size: 0.9rem; opacity: 0.04; }
+
+/* Hero Content */
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+.hero-content h1 {
+  font-size: 4rem;
+  background: linear-gradient(135deg, #E8D5B5 0%, #C9A96E 40%, #B8960F 70%, #C9A96E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.18em;
+  text-shadow: none;
+  filter: drop-shadow(0 0 60px rgba(201, 169, 110, 0.1));
+}
+.hero-content .subtitle {
+  font-size: 1rem;
+  color: #C9A96E;
+  letter-spacing: 0.6em;
+  margin-bottom: 1.5rem;
+  opacity: 0.35;
+  font-weight: 300;
+}
+.hero-content .desc {
+  color: #9B8EB5;
+  font-size: 0.95rem;
+  max-width: 520px;
+  margin: 0 auto 2rem;
+  opacity: 0.55;
+  line-height: 2;
+  font-weight: 300;
+}
+.hero-cta {
+  display: inline-block;
+  padding: 0.75rem 2.4rem;
+  background: transparent;
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  border-radius: 2px;
+  color: #C9A96E;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.5s;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.hero-cta:hover {
+  background: rgba(201, 169, 110, 0.06);
+  border-color: rgba(201, 169, 110, 0.4);
+  box-shadow: 0 0 40px rgba(201, 169, 110, 0.04);
+}
+
+/* Fortune Teller - more subdued */
+.fortune-teller {
+  position: absolute;
+  left: 5%;
+  bottom: 3%;
+  width: 160px; height: auto;
+  opacity: 0.15;
+  z-index: 2;
+}
+.fortune-teller svg { width: 100%; height: auto; filter: drop-shadow(0 0 20px rgba(201, 169, 110, 0.05)); }
+
+/* Floating Petals */
+#petal-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.petal {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+/* ========== Section Shared ========== */
+section { position: relative; padding: 6rem 2rem; }
+.section-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+/* ========== Section 1: 背景介绍 ========== */
+#background {
+  background: linear-gradient(180deg, #080418 0%, #0c0620 40%, #0f0828 70%, #0a0518 100%);
+  overflow: hidden;
+}
+#background::before {
+  content: '';
+  position: absolute;
+  top: -20%; left: -10%;
+  width: 60%; height: 80%;
+  background: radial-gradient(ellipse, rgba(201, 169, 110, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+#background::after {
+  content: '';
+  position: absolute;
+  bottom: -10%; right: -10%;
+  width: 50%; height: 60%;
+  background: radial-gradient(ellipse, rgba(60, 30, 100, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.bg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+.bg-card {
+  background: linear-gradient(145deg, rgba(201, 169, 110, 0.03), rgba(40, 20, 70, 0.05));
+  border: 1px solid rgba(201, 169, 110, 0.06);
+  border-radius: 4px;
+  padding: 2.2rem;
+  transition: all 0.5s;
+  position: relative;
+  overflow: hidden;
+}
+.bg-card:hover {
+  border-color: rgba(201, 169, 110, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+.bg-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.15), transparent);
+  opacity: 1;
+}
+.bg-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.06), transparent);
+}
+.bg-card h3 {
+  font-size: 1.3rem;
+  color: #E8D5B5;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 300;
+}
+.bg-card h3 .num {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  background: transparent;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  color: #C9A96E;
+  font-family: 'Noto Serif SC', serif;
+}
+.bg-card p { color: #9B8EB5; font-size: 0.92rem; margin-bottom: 0.7rem; opacity: 0.85; line-height: 1.9; }
+.bg-card p:last-child { margin-bottom: 0; }
+
+/* Crystal ornament */
+.crystal {
+  position: absolute;
+  bottom: -20px; right: 30px;
+  width: 70px; height: 100px;
+  background: linear-gradient(160deg,
+    rgba(201, 169, 110, 0.06) 0%,
+    rgba(168, 135, 74, 0.04) 40%,
+    rgba(80, 40, 120, 0.03) 100%);
+  clip-path: polygon(50% 0%, 80% 30%, 70% 100%, 30% 100%, 20% 30%);
+  filter: blur(6px);
+  animation: crystalGlow 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes crystalGlow {
+  0% { opacity: 0.15; filter: blur(8px); }
+  100% { opacity: 0.4; filter: blur(4px); }
+}
+
+/* ========== Section 2: 纸牌介绍 ========== */
+#cards {
+  background: linear-gradient(180deg, #0a0518 0%, #0c0620 40%, #0f0828 60%, #080418 100%);
+  overflow: hidden;
+}
+
+.section-intro {
+  text-align: center;
+  color: #9B8EB5;
+  font-size: 1rem;
+  max-width: 700px;
+  margin: -1.5rem auto 3rem;
+  opacity: 0.7;
+}
+
+/* Major Arcana Grid */
+.major-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+.card-item {
+  perspective: 900px;
+  height: 230px;
+  cursor: pointer;
+}
+.card-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+}
+.card-item.flipped .card-inner { transform: rotateY(180deg); }
+@media (hover: hover) {
+  .card-item:hover .card-inner { transform: rotateY(180deg); }
+}
+
+.card-front, .card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+/* Tarot Card Front */
+.card-front {
+  border: 2px solid rgba(201, 169, 110, 0.25);
+  box-shadow:
+    0 4px 20px rgba(100, 60, 180, 0.12),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+  position: relative;
+  overflow: hidden;
+}
+.card-front::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 1;
+}
+.card-front::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+.card-front .card-corner {
+  position: absolute;
+  z-index: 2;
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.card-front .card-corner.top-left { top: 8px; left: 10px; }
+.card-front .card-corner.top-right { top: 8px; right: 10px; }
+.card-front .card-corner.bottom-left { bottom: 8px; left: 10px; transform: rotate(180deg); }
+.card-front .card-corner.bottom-right { bottom: 8px; right: 10px; transform: rotate(180deg); }
+
+.card-front .card-art {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: relative;
+  z-index: 2;
+  background: rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 0 30px rgba(0,0,0,0.1);
+  margin-bottom: 0.4rem;
+  flex-shrink: 0;
+}
+.card-front .card-number {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 2;
+}
+.card-front .card-name {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 0.95rem;
+  color: #e8e0f0;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 2;
+  line-height: 1.2;
+}
+
+/* Card Back */
+.card-back {
+  background: linear-gradient(160deg, #1e1240, #2a1a55, #1a1130);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  transform: rotateY(180deg);
+  box-shadow: 0 4px 20px rgba(100, 60, 180, 0.2);
+  padding: 1rem 0.8rem;
+}
+.card-back p {
+  font-size: 0.7rem;
+  color: #9B8EB5;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+.card-back .card-keyword {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 0.85rem;
+  color: #E8D5B5;
+  margin-bottom: 0.3rem;
+}
+
+/* Minor Arcana */
+.suits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.suit-card {
+  background: linear-gradient(145deg, rgba(201, 169, 110, 0.03), rgba(40, 20, 70, 0.04));
+  border: 1px solid rgba(201, 169, 110, 0.06);
+  border-radius: 4px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.suit-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201, 169, 110, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+.suit-card .suit-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+.suit-card h4 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1.3rem;
+  color: #E8D5B5;
+  margin-bottom: 0.5rem;
+}
+.suit-card p {
+  font-size: 0.9rem;
+  color: #9B8EB5;
+  opacity: 0.7;
+  line-height: 1.7;
+}
+
+/* Decorative border for cards section */
+.tarot-border {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.15;
+}
+.tarot-border.tl { top: 20px; left: 20px; }
+.tarot-border.tr { top: 20px; right: 20px; transform: scaleX(-1); }
+.tarot-border.bl { bottom: 20px; left: 20px; transform: scaleY(-1); }
+.tarot-border.br { bottom: 20px; right: 20px; transform: scale(-1, -1); }
+
+/* ========== Section 3: 操作指南 ========== */
+#guide {
+  background: linear-gradient(180deg, #080418 0%, #0c0620 40%, #0a0518 80%, #060216 100%);
+}
+.guide-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+.guide-step {
+  background: linear-gradient(145deg, rgba(201, 169, 110, 0.03), rgba(40, 20, 70, 0.04));
+  border: 1px solid rgba(201, 169, 110, 0.06);
+  border-radius: 4px;
+  padding: 2.2rem 2rem;
+  text-align: center;
+  transition: all 0.5s;
+}
+.guide-step:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201, 169, 110, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+.guide-step .step-num {
+  width: 40px; height: 40px;
+  margin: 0 auto 0.8rem;
+  background: transparent;
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1.1rem;
+  color: #C9A96E;
+  opacity: 0.7;
+}
+.guide-step h4 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1.15rem;
+  color: #E8D5B5;
+  margin-bottom: 0.8rem;
+  font-weight: 300;
+}
+.guide-step p { font-size: 0.88rem; color: #9B8EB5; opacity: 0.75; line-height: 1.8; }
+
+/* Spreads */
+.spreads {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.spread-card {
+  background: linear-gradient(145deg, rgba(201, 169, 110, 0.03), rgba(40, 20, 70, 0.04));
+  border: 1px solid rgba(201, 169, 110, 0.06);
+  border-radius: 4px;
+  padding: 2rem;
+  transition: all 0.5s;
+}
+.spread-card:hover {
+  border-color: rgba(201, 169, 110, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+.spread-card h4 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1.1rem;
+  color: #E8D5B5;
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+}
+.spread-card .spread-desc {
+  font-size: 0.85rem;
+  color: #C9A96E;
+  opacity: 0.5;
+  margin-bottom: 0.8rem;
+}
+.spread-card .spread-info {
+  font-size: 0.82rem;
+  color: #9B8EB5;
+  opacity: 0.6;
+  line-height: 1.7;
+}
+
+/* Section Divider */
+.section-divider {
+  width: 200px; height: 1px;
+  margin: 5rem auto 0;
+  background: linear-gradient(90deg, transparent, #a78bfa, transparent);
+  opacity: 0.3;
+}
+
+/* ========== Footer ========== */
+footer {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: linear-gradient(180deg, #0a0518, #060216);
+  border-top: 1px solid rgba(201, 169, 110, 0.04);
+}
+footer .footer-logo {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1.1rem;
+  color: #C9A96E;
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+footer p {
+  font-size: 0.78rem;
+  color: #5a4a7a;
+  opacity: 0.5;
+}
+footer .footer-divider {
+  width: 40px; height: 1px;
+  margin: 1rem auto;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.15), transparent);
+}
+
+/* ========== Scroll Animation Reveal ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== Modal ========== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(10, 5, 25, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+.modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  max-height: 85vh;
+  background: linear-gradient(160deg, #0c0620, #100a28, #0e0822);
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  border-radius: 4px;
+  padding: 2.5rem;
+  overflow-y: auto;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), 0 0 80px rgba(201, 169, 110, 0.08);
+  transform: translateY(30px) scale(0.97);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.modal-overlay.active .modal-content {
+  transform: translateY(0) scale(1);
+}
+.modal-close {
+  position: absolute;
+  top: 1.2rem; right: 1.2rem;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 110, 0.1);
+  background: rgba(201, 169, 110, 0.03);
+  color: #9B8EB5;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.modal-close:hover {
+  background: rgba(201, 169, 110, 0.2);
+  border-color: rgba(201, 169, 110, 0.4);
+  transform: rotate(90deg);
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+}
+.modal-header .m-icon {
+  width: 52px; height: 52px;
+  display: flex;
+  align-items: center; justify-content: center;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, rgba(167,139,250,0.15), rgba(139,92,246,0.08));
+  border-radius: 14px;
+  border: 1px solid rgba(167,139,250,0.15);
+}
+.modal-header .m-title-group { flex: 1; }
+.modal-header .m-number {
+  font-size: 0.75rem;
+  color: #C9A96E;
+  opacity: 0.4;
+  letter-spacing: 0.15em;
+}
+.modal-header .m-name {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1.6rem;
+  color: #E8D5B5;
+  line-height: 1.3;
+  font-weight: 300;
+}
+.modal-header .m-name-en {
+  font-size: 0.8rem;
+  color: #C9A96E;
+  opacity: 0.35;
+  font-style: italic;
+}
+
+.modal-section {
+  margin-bottom: 1.4rem;
+}
+.modal-section:last-child { margin-bottom: 0; }
+.modal-section h4 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1rem;
+  color: #E8D5B5;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 300;
+}
+.modal-section h4::before {
+  content: '';
+  display: inline-block;
+  width: 3px; height: 14px;
+  background: linear-gradient(180deg, #C9A96E, #A8874A);
+}
+.modal-section p {
+  font-size: 0.9rem;
+  color: #9B8EB5;
+  line-height: 1.85;
+  opacity: 0.85;
+}
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+.modal-tag {
+  padding: 0.3rem 0.9rem;
+  background: rgba(201, 169, 110, 0.05);
+  border: 1px solid rgba(201, 169, 110, 0.08);
+  border-radius: 2px;
+  font-size: 0.82rem;
+  color: #9B8EB5;
+}
+
+.modal-meaning-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.modal-meaning-box {
+  padding: 1rem;
+  border-radius: 2px;
+  background: rgba(201, 169, 110, 0.03);
+  border: 1px solid rgba(201, 169, 110, 0.06);
+}
+.modal-meaning-box .label {
+  font-size: 0.75rem;
+  color: #C9A96E;
+  opacity: 0.5;
+  margin-bottom: 0.3rem;
+  display: block;
+  letter-spacing: 0.1em;
+}
+.modal-meaning-box .meaning-text {
+  font-size: 0.85rem;
+  color: #9B8EB5;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+.modal-meaning-box.upright { border-color: rgba(201, 169, 110, 0.12); }
+.modal-meaning-box.reversed { border-color: rgba(201, 169, 110, 0.06); }
+
+.modal-content::-webkit-scrollbar { width: 4px; }
+.modal-content::-webkit-scrollbar-track { background: transparent; }
+.modal-content::-webkit-scrollbar-thumb { background: #6d4a9e; border-radius: 2px; }
+
+/* ========== Daily Draw ========== */
+.daily-draw-btn {
+  display: inline-block;
+  padding: 0.6rem 1.8rem;
+  background: transparent;
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  border-radius: 2px;
+  color: #C9A96E;
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: all 0.5s;
+  cursor: pointer;
+  letter-spacing: 0.15em;
+}
+.daily-draw-btn:hover {
+  background: rgba(201, 169, 110, 0.05);
+  border-color: rgba(201, 169, 110, 0.3);
+  box-shadow: 0 0 30px rgba(201, 169, 110, 0.04);
+  color: #E8D5B5;
+}
+
+.daily-result-section {
+  display: none;
+  padding: 4rem 2rem;
+  background: linear-gradient(180deg, #0c0620, #080418);
+  text-align: center;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.04);
+}
+.daily-result-section.active { display: block; }
+.daily-result-section h3 {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1.8rem;
+  color: #E8D5B5;
+  margin-bottom: 0.5rem;
+}
+.daily-result-section .daily-date {
+  font-size: 0.85rem;
+  color: #C9A96E;
+  opacity: 0.5;
+  margin-bottom: 2rem;
+}
+.daily-result-section .daily-card-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.daily-result-section .daily-card-icon {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center; justify-content: center;
+  font-size: 3rem;
+  border: 2px solid rgba(201, 169, 110, 0.2);
+  margin: 0 auto;
+}
+.daily-result-section .daily-card-name {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1.6rem;
+  color: #e8e0f0;
+}
+.daily-result-section .daily-card-keyword {
+  color: #C9A96E;
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+.daily-result-section .daily-card-msg {
+  max-width: 500px;
+  margin: 0 auto;
+  color: #9B8EB5;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  opacity: 0.8;
+}
+.daily-result-section .daily-close-result {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  background: rgba(201, 169, 110, 0.1);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  border-radius: 30px;
+  color: #C9A96E;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+.daily-result-section .daily-close-result:hover {
+  background: rgba(201, 169, 110, 0.2);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  h2 { font-size: 2rem; }
+  .hero-content h1 { font-size: 3rem; }
+  .hero-content .subtitle { font-size: 1rem; letter-spacing: 0.3em; }
+  .bg-grid { grid-template-columns: 1fr; }
+  .suits-grid { grid-template-columns: repeat(2, 1fr); }
+  .guide-steps { grid-template-columns: 1fr; }
+  .spreads { grid-template-columns: 1fr; }
+  .fortune-teller { display: none; }
+  .moon { width: 80px; height: 80px; right: 8%; }
+}
+@media (max-width: 600px) {
+  section { padding: 4rem 1.2rem; }
+  .hero-content h1 { font-size: 2.2rem; }
+  header { padding: 0.6rem 1rem; }
+  nav a { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+  .major-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-item { height: 170px; }
+  .suits-grid { grid-template-columns: 1fr; }
+  .guide-step { padding: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== Floating Petals Container ========== -->
+<div id="petal-container"></div>
+
+<!-- ========== Header ========== -->
+<header id="header">
+  <a href="#" class="logo">
+    <span class="logo-icon">✦</span>
+    塔罗指南
+  </a>
+  <nav>
+    <a href="#background" class="nav-link">背景介绍</a>
+    <a href="#cards" class="nav-link">纸牌介绍</a>
+    <a href="#guide" class="nav-link">操作指南</a>
+  </nav>
+</header>
+
+<!-- ========== Hero ========== -->
+<section class="hero" id="hero">
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
+
+  <!-- Gold flowing lines -->
+  <div class="gold-lines">
+    <svg class="gold-line gold-line-1" viewBox="0 0 300 200"><path d="M0,100 Q80,20 150,80 Q220,140 300,60" class="gold-line"/><animate attributeName="stroke-dashoffset" from="0" to="1200" dur="12s" repeatCount="indefinite"/></svg>
+    <svg class="gold-line gold-line-2" viewBox="0 0 250 180"><path d="M0,90 Q70,30 130,90 Q190,150 250,80" class="gold-line thicker"/><animate attributeName="stroke-dashoffset" from="0" to="1000" dur="15s" repeatCount="indefinite"/></svg>
+  </div>
+
+  <!-- Runes -->
+  <div class="rune rune-1">ᚠ</div>
+  <div class="rune rune-2">ᚢ</div>
+  <div class="rune rune-3">ᚦ</div>
+  <div class="rune rune-4">ᚨ</div>
+  <div class="rune rune-5">ᚱ</div>
+
+  <div class="fortune-teller">
+    <svg viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Starry robe -->
+      <path d="M100 200 Q60 180 40 230 L50 260 Q80 240 100 250 Q120 240 150 260 L160 230 Q140 180 100 200Z" fill="rgba(167,139,250,0.2)" stroke="rgba(200,180,255,0.25)" stroke-width="0.8"/>
+      <!-- Upper body -->
+      <path d="M75 160 Q70 135 80 120 L85 110 Q90 95 100 90 Q110 95 115 110 L120 120 Q130 135 125 160Z" fill="rgba(200,180,255,0.15)" stroke="rgba(200,180,255,0.2)" stroke-width="0.8"/>
+      <!-- Head -->
+      <circle cx="100" cy="72" r="22" fill="rgba(230,220,245,0.12)" stroke="rgba(200,180,255,0.2)" stroke-width="0.8"/>
+      <!-- Hair -->
+      <path d="M78 72 Q78 52 100 48 Q122 52 122 72" fill="rgba(167,139,250,0.15)" stroke="none"/>
+      <!-- Crown -->
+      <path d="M85 55 L88 46 L92 52 L96 44 L100 51 L104 44 L108 52 L112 46 L115 55" fill="none" stroke="rgba(200,180,255,0.3)" stroke-width="1.2"/>
+      <!-- Crescent on crown -->
+      <circle cx="100" cy="43" r="4" fill="none" stroke="rgba(234,220,255,0.3)" stroke-width="0.8"/>
+      <!-- Arms -->
+      <path d="M80 120 Q60 130 45 150" fill="none" stroke="rgba(200,180,255,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M120 120 Q140 130 155 150" fill="none" stroke="rgba(200,180,255,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Hand with star -->
+      <circle cx="155" cy="150" r="4" fill="rgba(234,220,255,0.2)"/>
+      <circle cx="155" cy="150" r="1.5" fill="rgba(234,220,255,0.4)"/>
+      <!-- Stars on robe -->
+      <circle cx="85" cy="210" r="1.2" fill="rgba(200,180,255,0.3)"/>
+      <circle cx="100" cy="230" r="1" fill="rgba(200,180,255,0.25)"/>
+      <circle cx="115" cy="215" r="1" fill="rgba(200,180,255,0.2)"/>
+      <circle cx="95" cy="195" r="0.8" fill="rgba(200,180,255,0.2)"/>
+      <circle cx="110" cy="200" r="1" fill="rgba(200,180,255,0.25)"/>
+      <!-- Robe bottom decoration -->
+      <path d="M60 240 Q80 235 100 238 Q120 235 140 240" fill="none" stroke="rgba(200,180,255,0.15)" stroke-width="0.6"/>
+    </svg>
+  </div>
+
+  <div class="mist"></div>
+
+  <div class="hero-content">
+    <h1>塔罗指南</h1>
+    <p class="subtitle">✦ 神秘之境 ✦</p>
+    <p class="desc">
+      在香芋紫雾的萦绕中，月光洒落星辰低语。<br>
+      开启一段通往内心深处的智慧之旅。
+    </p>
+    <a href="#background" class="hero-cta">开始探索</a>
+    <div style="margin-top:1.2rem;">
+      <a href="#" class="daily-draw-btn" id="daily-draw-btn">🎴 每日塔罗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 1: 背景介绍 ========== -->
+<section id="background">
+  <div class="crystal" style="bottom: 60px; right: 5%; width: 100px; height: 150px;"></div>
+  <div class="crystal" style="bottom: 30px; right: 15%; width: 60px; height: 90px; animation-delay: -2s;"></div>
+
+  <div class="section-inner">
+    <h2 class="reveal">背景介绍</h2>
+    <p class="section-intro reveal" style="margin-top:-1.5rem; margin-bottom:2.5rem;">
+      塔罗牌，一幅承载千年智慧的画卷，连接着表意识与潜意识的桥梁。
+    </p>
+
+    <div class="bg-grid">
+      <div class="bg-card reveal">
+        <h3><span class="num">Ⅰ</span> 起源与历史</h3>
+        <p>塔罗牌起源于 15 世纪的欧洲，最初是贵族间流行的纸牌游戏 "Trionfi"（胜利牌）。</p>
+        <p>到了 18 世纪，神秘学家开始将塔罗与卡巴拉、占星学和炼金术等神秘学体系联系起来，使其逐渐演变为一种强大的自我探索与灵性成长工具。</p>
+        <p>今天，塔罗牌被全球数百万人用于占卜、冥想和心理探索，成为连接内心世界的神秘之镜。</p>
+      </div>
+
+      <div class="bg-card reveal">
+        <h3><span class="num">Ⅱ</span> 塔罗的结构</h3>
+        <p>一副标准塔罗牌共有 <strong style="color:#E8D5B5;">78 张</strong> 牌，分为两大部分：</p>
+        <p><strong style="color:#E8D5B5;">大阿卡那（Major Arcana）</strong> — 22 张牌，编号 0 至 21。描绘人生旅程中的重大课题和灵性功课，如「愚者」代表新开始，「死神」代表蜕变。</p>
+        <p><strong style="color:#E8D5B5;">小阿卡那（Minor Arcana）</strong> — 56 张牌，分为四组牌组：权杖（火）、圣杯（水）、宝剑（风）、星币（土），对应日常生活的各个面向。</p>
+      </div>
+
+      <div class="bg-card reveal">
+        <h3><span class="num">Ⅲ</span> 大阿卡那 — 愚人之旅</h3>
+        <p>大阿卡那 22 张牌讲述了一个完整的叙事——「愚人之旅」。从愚者（0 号牌）出发，历经世间万象，最终抵达世界（21 号牌），象征着灵魂从天真到圆满的成长历程。</p>
+        <p>每一张大阿卡那都代表着人生某个阶段的原型能量，理解它们就如同阅读自己的生命地图。</p>
+      </div>
+
+      <div class="bg-card reveal">
+        <h3><span class="num">Ⅳ</span> 小阿卡那 — 四元素</h3>
+        <p><strong style="color:#E8D5B5;">权杖</strong> 🔥 — 代表热情、创造力和行动力，关乎事业与冒险。</p>
+        <p><strong style="color:#E8D5B5;">圣杯</strong> 💧 — 代表情感、直觉和关系，关乎爱与内心世界。</p>
+        <p><strong style="color:#E8D5B5;">宝剑</strong> 💨 — 代表思想、沟通和挑战，关乎智慧与抉择。</p>
+        <p><strong style="color:#E8D5B5;">星币</strong> 🌍 — 代表物质、健康和财富，关乎现实与丰盛。</p>
+        <p>每组包含 14 张牌：王牌（Ace）到十号牌，加上四张宫廷牌（侍卫、骑士、王后、国王）。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 2: 纸牌介绍 ========== -->
+<section id="cards">
+  <div class="tarot-border tl">
+    <svg width="60" height="60" viewBox="0 0 60 60"><path d="M0 30 Q30 0 60 30 Q30 60 0 30Z" fill="none" stroke="rgba(167,139,250,0.2)" stroke-width="0.8"/><circle cx="30" cy="30" r="8" fill="none" stroke="rgba(167,139,250,0.15)" stroke-width="0.6"/></svg>
+  </div>
+  <div class="tarot-border tr">
+    <svg width="60" height="60" viewBox="0 0 60 60"><path d="M0 30 Q30 0 60 30 Q30 60 0 30Z" fill="none" stroke="rgba(167,139,250,0.2)" stroke-width="0.8"/><circle cx="30" cy="30" r="8" fill="none" stroke="rgba(167,139,250,0.15)" stroke-width="0.6"/></svg>
+  </div>
+  <div class="tarot-border bl">
+    <svg width="60" height="60" viewBox="0 0 60 60"><path d="M0 30 Q30 0 60 30 Q30 60 0 30Z" fill="none" stroke="rgba(167,139,250,0.2)" stroke-width="0.8"/><circle cx="30" cy="30" r="8" fill="none" stroke="rgba(167,139,250,0.15)" stroke-width="0.6"/></svg>
+  </div>
+  <div class="tarot-border br">
+    <svg width="60" height="60" viewBox="0 0 60 60"><path d="M0 30 Q30 0 60 30 Q30 60 0 30Z" fill="none" stroke="rgba(167,139,250,0.2)" stroke-width="0.8"/><circle cx="30" cy="30" r="8" fill="none" stroke="rgba(167,139,250,0.15)" stroke-width="0.6"/></svg>
+  </div>
+
+  <div class="section-inner">
+    <h2 class="reveal">纸牌介绍</h2>
+    <p class="section-intro reveal">
+      每一张塔罗牌都是一扇通往智慧的大门。悬停翻转查看关键词，<br>点击卡片打开完整解读——包括韦特牌面描述、正逆位含义与象征符号。
+    </p>
+
+    <h3 style="font-family:'ZCOOL XiaoWei',serif; font-size:1.4rem; color:#E8D5B5; text-align:center; margin-bottom:1.5rem;" class="reveal">
+      ✦ 大阿卡那（Major Arcana）✦
+    </h3>
+
+    <div class="major-grid" id="major-grid">
+      <!-- Populated by JS -->
+    </div>
+
+    <h3 style="font-family:'ZCOOL XiaoWei',serif; font-size:1.4rem; color:#E8D5B5; text-align:center; margin:3rem 0 1.5rem;" class="reveal">
+      ✦ 小阿卡那（Minor Arcana）✦
+    </h3>
+
+    <div class="suits-grid">
+      <div class="suit-card reveal">
+        <div class="suit-icon">🔥</div>
+        <h4>权杖 · 火</h4>
+        <p>代表热情、创造力与行动力。<br>关乎事业、冒险与生命力的燃烧。<br>逆位可能意味着拖延或方向迷失。</p>
+      </div>
+      <div class="suit-card reveal">
+        <div class="suit-icon">💧</div>
+        <h4>圣杯 · 水</h4>
+        <p>代表情感、直觉与关系。<br>关乎爱、梦想与内心世界的流动。<br>逆位可能意味着情感阻塞或幻灭。</p>
+      </div>
+      <div class="suit-card reveal">
+        <div class="suit-icon">💨</div>
+        <h4>宝剑 · 风</h4>
+        <p>代表思想、沟通与挑战。<br>关乎智慧、真相与决策的锋利。<br>逆位可能意味着混乱或自我欺骗。</p>
+      </div>
+      <div class="suit-card reveal">
+        <div class="suit-icon">🌍</div>
+        <h4>星币 · 土</h4>
+        <p>代表物质、健康与财富。<br>关乎现实、资源与丰盛的积累。<br>逆位可能意味着财务压力或停滞。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Section 3: 操作指南 ========== -->
+<section id="guide">
+  <div class="section-inner">
+    <h2 class="reveal">操作指南</h2>
+    <p class="section-intro reveal">
+      占卜是一门艺术，也是一场与自我的深度对话。跟随以下步骤，开启你的塔罗之旅。
+    </p>
+
+    <div class="guide-steps">
+      <div class="guide-step reveal">
+        <div class="step-num">01</div>
+        <h4>营造静谧空间</h4>
+        <p>选择一个安静不被打扰的环境。可以点燃蜡烛、薰香，或播放柔和的音乐。深呼吸几次，让自己的心念沉静下来，与内心建立连接。</p>
+      </div>
+      <div class="guide-step reveal">
+        <div class="step-num">02</div>
+        <h4>集中意念洗牌</h4>
+        <p>将塔罗牌握在手中，在心中默念或说出你想要探索的问题。一边洗牌一边将注意力集中在问题上。洗牌直到感觉合适为止。</p>
+      </div>
+      <div class="guide-step reveal">
+        <div class="step-num">03</div>
+        <h4>切牌与抽牌</h4>
+        <p>将洗好的牌分成三叠，再重新收拢。根据选择的牌阵，依次抽取相应数量的牌。抽牌时听从直觉——那双手自然会知道该拿哪一张。</p>
+      </div>
+    </div>
+
+    <h3 style="font-family:'ZCOOL XiaoWei',serif; font-size:1.4rem; color:#E8D5B5; text-align:center; margin:3rem 0 1.5rem;" class="reveal">
+      ✦ 常用牌阵 ✦
+    </h3>
+
+    <div class="spreads">
+      <div class="spread-card reveal">
+        <h4>🔮 三张牌阵</h4>
+        <p class="spread-desc">过去 · 现在 · 未来</p>
+        <p class="spread-info">最简单也最经典的牌阵。第一张代表问题的背景或过去的影响，第二张揭示当下的状况，第三张预示可能的未来走向。适合快速获取清晰的指引。</p>
+      </div>
+      <div class="spread-card reveal">
+        <h4>🔮 圣三角牌阵</h4>
+        <p class="spread-desc">精神 · 情感 · 物质</p>
+        <p class="spread-info">从三个维度审视问题：精神层面的意义与成长，情感层面的感受与关系，物质层面的现实状况。帮助你获得全方位的平衡视角。</p>
+      </div>
+      <div class="spread-card reveal">
+        <h4>🔮 凯尔特十字</h4>
+        <p class="spread-desc">全面深度分析</p>
+        <p class="spread-info">十张牌的经典阵型，覆盖问题的核心、阻碍、潜意识影响、过去基础、未来可能、自我认知、环境因素、希望与恐惧以及最终结果。深入透彻，适合重要问题。</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="reveal" style="text-align:center; margin-top:3rem;">
+      <p style="color:#c4b5fd; opacity:0.6; font-size:0.92rem; max-width:600px; margin:0 auto; line-height:2;">
+        💜 记住，塔罗牌不是预言命运的工具，而是映照你内心的镜子。<br>
+        真正的智慧不在牌中，而在你的心里。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Daily Result ========== -->
+<section class="daily-result-section" id="daily-result">
+  <h3>🎴 今日塔罗</h3>
+  <p class="daily-date" id="daily-date"></p>
+  <div class="daily-card-display">
+    <div class="daily-card-icon" id="daily-icon">🃏</div>
+    <div class="daily-card-name" id="daily-name">等待命运的翻牌...</div>
+    <div class="daily-card-keyword" id="daily-keyword"></div>
+    <p class="daily-card-msg" id="daily-msg"></p>
+  </div>
+  <a href="#cards" class="daily-close-result" id="daily-close">了解全部 22 张大阿卡那 →</a>
+</section>
+
+<!-- ========== Footer ========== -->
+<footer>
+  <div class="footer-divider"></div>
+  <div class="footer-logo">✦ 塔罗指南 · Tarot Guide ✦</div>
+  <p>在香芋紫色的星光中，寻找属于你的答案</p>
+  <p style="margin-top:0.5rem; font-size:0.8rem;">© 2026 塔罗指南 · 以内心为镜</p>
+</footer>
+
+<!-- ========== Card Detail Modal ========== -->
+<div class="modal-overlay" id="card-modal">
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div class="modal-header">
+      <div class="m-icon" id="m-icon"></div>
+      <div class="m-title-group">
+        <div class="m-number" id="m-number"></div>
+        <div class="m-name" id="m-name"></div>
+        <div class="m-name-en" id="m-name-en"></div>
+      </div>
+    </div>
+    <div class="modal-section">
+      <h4>卡面描述</h4>
+      <p id="m-scene"></p>
+    </div>
+    <div class="modal-section">
+      <h4>象征符号</h4>
+      <div class="modal-tags" id="m-symbols"></div>
+    </div>
+    <div class="modal-section">
+      <h4>含义解读</h4>
+      <div class="modal-meaning-grid">
+        <div class="modal-meaning-box upright">
+          <span class="label">✦ 正位</span>
+          <div class="meaning-text" id="m-upright"></div>
+        </div>
+        <div class="modal-meaning-box reversed">
+          <span class="label">✦ 逆位</span>
+          <div class="meaning-text" id="m-reversed"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== JavaScript ========== -->
+<script>
+// ========== Major Arcana Data (Waite-Smith) ==========
+const majorArcana = [
+  {
+    num: 0, name: '愚者', nameEn: 'The Fool',
+    icon: '🎭', keyword: '新开始 · 冒险',
+    scene: '一个身着华丽彩衣的年轻人站在悬崖边缘，肩扛行囊，右手持一朵白玫瑰。他仰望天空，神情轻松愉悦，对脚下的深渊毫不在意。身旁一只白色的小狗跳跃吠叫，试图提醒他前方的危险。背景是明亮的黄色天空和远处白雪皑皑的山峰。',
+    upright: '全新的开始正在呼唤你！保持开放和纯真的心态，勇敢地迈出第一步。信任宇宙的安排，即使前路看似未知，你内心的热情和信念会带你走向惊喜。这是放下包袱、追随直觉的时刻。',
+    reversed: '小心鲁莽的决定！可能因为缺乏规划而陷入危险，或因为过度犹豫而错失良机。检查自己是否在用"天真"作为逃避责任的借口，需要找回脚踏实地的平衡感。',
+    symbols: ['悬崖边的舞者', '白玫瑰', '行囊', '小狗', '黄色天空', '深渊']
+  },
+  {
+    num: 1, name: '魔术师', nameEn: 'The Magician',
+    icon: '✨', keyword: '创造 · 资源',
+    scene: '一位身穿红袍、腰系蛇形腰带的年轻男子站在花丛中，右手指向天空，左手指向地面。面前的石桌上摆放着四元素的象征物：权杖、圣杯、宝剑、星币。头顶上方悬浮着∞符号，腰间一条咬着自己尾巴的蛇（衔尾蛇）形成无限循环。',
+    upright: '你拥有创造奇迹所需的一切资源和能力！专注你的意念和行动力，将梦想化为现实。这是发挥你的才华、运用所有工具和资源的时刻。相信自己，你可以做到！',
+    reversed: '天赋和才华被浪费或误用。注意是否有操纵他人或走捷径的倾向。也可能是你低估了自己的能力，导致潜力未能发挥。重新连接你内在的创造力。',
+    symbols: ['无限符号∞', '四元素（权杖圣杯宝剑星币）', '一指天一指地', '衔尾蛇', '红花绿叶']
+  },
+  {
+    num: 2, name: '女祭司', nameEn: 'The High Priestess',
+    icon: '🌙', keyword: '直觉 · 奥秘',
+    scene: '一位身穿蓝色长袍的静默女性端坐在黑白两根柱子之间，头戴高冠，手持一卷刻有TORA字样的经卷。她的脚边有一弯新月，身后的帷幕上装饰着象征丰饶的石榴与棕榈叶图案。帷幕之后是若隐若现的水面。',
+    upright: '静默中蕴藏着深刻的智慧！听从你的内心和直觉，答案不在外界而在你的内心深处。保持耐心和观察，让潜意识指引你。有时不行动比行动更需要智慧。',
+    reversed: '直觉被压抑，或你过于关注表面而忽略了内心的声音。可能在抗拒听取自己的第六感，或者在信息不全的情况下仓促下结论。退一步，重新聆听。',
+    symbols: ['黑白双柱（Boaz & Jachin）', '卷轴（隐藏的知识）', '新月', '石榴帷幕', '水面']
+  },
+  {
+    num: 3, name: '皇后', nameEn: 'The Empress',
+    icon: '🌿', keyword: '丰饶 · 滋养',
+    scene: '一位金发女性头戴十二星冠，身穿印有石榴图案的华丽宽袍，舒适地靠在柔软的宝座上。她手持权杖，周围是茂密的金色麦田和青翠的森林。前景中一条清澈的溪流蜿蜒流淌，为大地带来生机。',
+    upright: '丰盛与美好的能量环绕着你！敞开自己接受宇宙的滋养，无论是爱的滋养、物质丰盛还是创造力的表达。这是享受生活、感受自然之美、实践自我关爱的时刻。',
+    reversed: '注意过度依赖他人或过度付出导致的能量耗竭。创造力可能受阻，或者在物质享受上失去了平衡。需要回归自我照顾，重建内在的安全感。',
+    symbols: ['十二星冠', '石榴袍', '麦田', '溪流', '森林', '权杖']
+  },
+  {
+    num: 4, name: '皇帝', nameEn: 'The Emperor',
+    icon: '👑', keyword: '权威 · 秩序',
+    scene: '一位威严成熟的男性坐在石头宝座上，身穿红色长袍和坚固铠甲，头戴金色皇冠。右手持有安克赫（生命之符），左手持金色宝球。宝座两侧雕刻着公羊头，背景是光秃秃的红色山脉和干旱的大地，象征严峻的现实。',
+    upright: '建立稳固的秩序和结构！用纪律和责任心引领你的生活。这是发挥领导力、制定规则、保护你所爱的人的时刻。坚定而公正，做自己生命之国的帝王。',
+    reversed: '警惕权力的滥用或过度的控制欲！可能在面对责任时感到力不从心，或者在过于僵化的结构中失去了灵活性。需要重新审视什么是真正的权威。',
+    symbols: ['公羊头宝座', '安克赫（生命之符）', '金色宝球', '铠甲', '红色山脉']
+  },
+  {
+    num: 5, name: '教皇', nameEn: 'The Hierophant',
+    icon: '📜', keyword: '传承 · 信仰',
+    scene: '一位身穿红袍的教皇端坐在灰色双柱之间，头戴三层皇冠，右手伸出做出祝福手势，左手持有三重十字权杖。他面前跪着两位剃度的信徒，穿着红玫瑰与白百合图案的袍子。拱门结构营造出神圣庄严的氛围。',
+    upright: '寻求精神上的指引和智慧！这是向导师学习、遵循传统、参与正式教育的时刻。你可能在寻找更深层的意义和信仰体系，或需要一位智者为你指点迷津。',
+    reversed: '挑战规则和传统！可能感觉被教条束缚，或在寻找个人信仰的道路上与主流产生分歧。这是建立个人价值观而非盲从他人教导的时刻。',
+    symbols: ['三层皇冠', '三重十字权杖', '灰色双柱', '红玫瑰与白百合', '信徒']
+  },
+  {
+    num: 6, name: '恋人', nameEn: 'The Lovers',
+    icon: '💞', keyword: '选择 · 连接',
+    scene: '一对年轻的男女赤身站在伊甸园中，男子望向女子，女子仰望天空。头顶上方，巨大的天使张开双臂，将祝福的光芒洒向二人。男子身后是燃烧着火焰的生命之树，女子身后是结满果实的智慧之树。远处山脉连绵。',
+    upright: '跟随内心的真实做出选择！这可能是一段深刻的感情关系，或是一个重要的价值观抉择。真诚地面对自己和他人，让爱与价值观引导你走向和谐。',
+    reversed: '关系的失衡或价值观的冲突正在困扰你。可能在选择中感到分裂，或者关系中出现了信任危机。需要回归内心，诚实面对分歧的根本。',
+    symbols: ['天使拉斐尔', '生命之树/智慧之树', '赤裸（真诚）', '火焰', '山脉']
+  },
+  {
+    num: 7, name: '战车', nameEn: 'The Chariot',
+    icon: '⚔️', keyword: '意志 · 胜利',
+    scene: '一位头戴八角星冠、身穿铠甲的战士站在由两只狮身人面兽（一黑一白）拉动的战车上。他手持权杖，肩上有新月形肩章。战车有星形顶篷，背景是护城河环绕的城墙城市。',
+    upright: '坚定的意志将带你走向胜利！用纪律和决心控制住内心的对立力量（黑白狮身人面兽），朝着目标奋勇前进。你拥有克服一切障碍的力量和毅力！',
+    reversed: '注意失控或方向迷失！可能内心的冲突（理性vs情感）让你无法前进，或是过度侵略性的方式导致阻力重重。需要重新找到你的中心和方向。',
+    symbols: ['黑白狮身人面兽', '八角星冠', '权杖', '城墙', '护城河']
+  },
+  {
+    num: 8, name: '力量', nameEn: 'Strength',
+    icon: '🦁', keyword: '勇气 · 内在力量',
+    scene: '一位身穿白裙的女子温柔地俯身，用双手轻轻合上一头雄狮的嘴。她的头上方悬浮着∞符号，腰间和头上点缀着鲜花花环。狮子温顺地伸出舌头，尾巴夹在腿间。背景是黄色的田野和远山。',
+    upright: '真正的力量源自内心的温柔与坚韧！你不是用蛮力征服，而是用耐心、勇气和爱心化解困难。面对恐惧和挑战时，温柔而坚定地前行。你比你想象的更坚强。',
+    reversed: '自我怀疑和内心软弱正在消耗你的能量。可能因为缺乏自信而退缩，或在面对挑战时被恐惧压倒。需要重新连接内在的力量和勇气。',
+    symbols: ['女子与狮', '∞符号', '花环', '黄色田野', '温柔的手势']
+  },
+  {
+    num: 9, name: '隐士', nameEn: 'The Hermit',
+    icon: '🏮', keyword: '内省 · 指引',
+    scene: '一位身穿灰色长袍的老人站在雪山之巅，右手提着一盏点亮的灯笼，左手持一根长木杖。灯笼中有一颗光芒四射的六芒星。四周是白雪皑皑的荒凉群山，寂静而庄严。',
+    upright: '独处是寻找智慧的必经之路！退一步，远离喧嚣，倾听内在的声音。你不需要外部来寻找答案——光就在你心中。这是自我反思、冥想和寻求深层真理的时刻。',
+    reversed: '孤立变成了孤独，你可能过度封闭自己或拒绝接受外界的帮助。也可能是害怕独处而不停地寻求他人的陪伴。需要找到独处和社交的平衡。',
+    symbols: ['六芒星灯笼', '雪山之巅', '长杖', '灰色长袍', '孤独的旅者']
+  },
+  {
+    num: 10, name: '命运之轮', nameEn: 'Wheel of Fortune',
+    icon: '☸️', keyword: '循环 · 转变',
+    scene: '一个巨大的蓝色命运之轮在天空中旋转，轮身上环绕着炼金符号和希伯来字母。轮子左侧有一条蛇向下滑落，右侧有胡狼头神向上攀升，顶部端坐着持剑的狮身人面兽。四角有云中四活物各持经书。',
+    upright: '变化是生命的常态，幸运之轮正在转动！你无法永远控制境遇，但可以调整自己的态度。顺境时保持谦逊，逆境时保持希望。这是命运给予你改变和成长的机会。',
+    reversed: '感觉自己被困在命运的循环中？好运暂缓，外部环境似乎对你不利。但记住，轮子总会再转动。检查是否有需要打破的负面模式。',
+    symbols: ['命运之轮', '蛇（下沉）', '胡狼神（上升）', '狮身人面兽', '四活物']
+  },
+  {
+    num: 11, name: '正义', nameEn: 'Justice',
+    icon: '⚖️', keyword: '平衡 · 因果',
+    scene: '一位表情严肃的金冠女性端坐在灰柱之间，右手高举锋利的宝剑，左手持金色天平。她身穿红袍绿披风，胸前佩戴方形宝石。黄色帷幕在身后展开，两柱之间的空间显得庄严而理性。',
+    upright: '真相和公平终将浮出水面！你种下的因将结出相应的果。诚实面对自己和他人，做出公正的判断。这是法律事务、合同和重要决策的有利时机。',
+    reversed: '不公正或不平衡的状况让你困扰。可能在逃避责任，或没有诚实地面对真相。注意是否有不公平的对待，同时也检查是否对自己过于严苛。',
+    symbols: ['天平（公平）', '剑（决断）', '金冠', '方形宝石', '帷幕']
+  },
+  {
+    num: 12, name: '倒吊人', nameEn: 'The Hanged Man',
+    icon: '🕯️', keyword: '臣服 · 新视角',
+    scene: '一个年轻男人被倒吊在T形木架上，右脚被绑住悬挂，左脚盘绕在右腿后形成十字形。他的双手被反绑在背后，但表情平静安详，仿佛在冥想。头后散发出金色的光晕。',
+    upright: '暂停和臣服是获得智慧的途径！换个角度看问题——有时你越挣扎越被困住，放下反而得到解脱。这是休息、反思、等待的时刻。看似停滞，实则在为新的成长积蓄能量。',
+    reversed: '不愿放下的固执正在消耗你。可能明知需要改变却仍然死撑，或者在拖延必要的决定。检查是否因为恐惧而拒绝接受新的视角。',
+    symbols: ['倒吊的姿态', '十字形腿', '金色光晕', '平静的表情', 'T形架']
+  },
+  {
+    num: 13, name: '死神', nameEn: 'Death',
+    icon: '💀', keyword: '结束 · 新生',
+    scene: '一具身穿铠甲的骷髅骑士骑着一匹雄壮的白马，手中高举一面绘有白玫瑰的黑色旗帜。白马踏过倒在地上的国王、主教、少女和儿童。一位牧师在祈祷，两座高塔之间升起苍白的落日。',
+    upright: '旧的篇章必须彻底结束，新生命才能绽放！不要抗拒变化——无论是一段关系的结束、工作的转变还是旧有模式的瓦解，都是为了让更好的事物进入你的生命。',
+    reversed: '紧紧抓住已死去的过去只会延长痛苦。你抗拒无法避免的改变，导致能量停滞。记住：只有让旧的不再适合你的离开，新的祝福才能到来。',
+    symbols: ['骷髅骑士', '白玫瑰旗', '白马', '落日与塔', '各阶层倒下的人']
+  },
+  {
+    num: 14, name: '节制', nameEn: 'Temperance',
+    icon: '⚗️', keyword: '调和 · 适度',
+    scene: '一位天使站在溪流边，一只脚踏入水中，另一只脚踏在岸上。天使双手持两个金色圣杯，将水在两个杯子之间来回倒换。胸前佩戴着金色三角形太阳符号，头上有光芒。远方有一条蜿蜒的小路通向金色的山脉和王冠。',
+    upright: '找到平衡的中间之道！协调对立面——工作与生活、理性与情感、付出与接受。耐心和适度是关键词，生命的流动会在调和之中自然顺畅。',
+    reversed: '生活失去了平衡！可能在一个极端摇摆，过于放纵或过度节制。不耐烦和急功近利可能导致事与愿违。需要重新找到和谐的节奏。',
+    symbols: ['天使', '两杯倒水', '踏水踏岸', '太阳胸针', '小路与王冠']
+  },
+  {
+    num: 15, name: '恶魔', nameEn: 'The Devil',
+    icon: '😈', keyword: '束缚 · 执念',
+    scene: '巨大的长角恶魔蹲坐在石台上，长着蝙蝠翅膀、猛禽的爪和山羊的腿。右手举起做出反向祝福手势，左手持火炬。一个赤裸的男人和女人被锁链拴在石台上，但锁链松松地挂在他们的脖子上——他们完全可以自己取下。',
+    upright: '审视那些你以为是无法挣脱的枷锁！成瘾、物质主义、执念或toxic关系正在消耗你的能量。关键问题是：真正锁住你的是外界的束缚，还是你自己的恐惧和执念？',
+    reversed: '觉醒的时刻到了！你开始看清束缚你的幻象，并决定挣脱枷锁。这是从黑暗走向光明、从依赖走向独立的转折点。恭喜你正在夺回自己的权力！',
+    symbols: ['长角恶魔', '反向祝福手势', '松开的锁链', '赤裸男女', '倒五角星']
+  },
+  {
+    num: 16, name: '高塔', nameEn: 'The Tower',
+    icon: '🌩️', keyword: '崩塌 · 觉醒',
+    scene: '一座高耸在山顶的石塔被一道巨大的闪电击中，塔顶的金色皇冠被击落。两个人从塔上坠落，头朝下摔向地面。塔身燃起火焰，烟雾弥漫。背景是暴雨和阴暗的天空，一切天翻地覆。',
+    upright: '突如其来的剧变粉碎了你的安全感！虽然痛苦，但这却是真相的闪电刺破谎言的时刻。旧的虚假结构必须崩塌，才能为更真实坚固的自我腾出空间。',
+    reversed: '你可能预感到危机即将来临却试图避免。抗拒必要的改变只会延长痛苦。另一种可能是，最坏的已经过去，你正在废墟中开始重建。',
+    symbols: ['闪电', '崩塌的高塔', '坠落的皇冠', '坠落的人', '火焰']
+  },
+  {
+    num: 17, name: '星星', nameEn: 'The Star',
+    icon: '⭐', keyword: '希望 · 灵感',
+    scene: '一位赤裸的女子单膝跪在水边，一只脚没入清澈的水中。她双手各持一个金色水罐，一罐将生命之水倒回池中，另一罐倒在岸边的草地上。头顶上方一颗巨大的八角星闪耀光芒，周围环绕七颗较小的星星。',
+    upright: '在暴风雨之后，星星带来宁静与希望的疗愈能量！你被宇宙温柔地照拂着，灵感如流水般涌入。这是充满希望、灵感和内在平静的时期，信任生命之流。',
+    reversed: '感到迷茫和失去方向？你可能失去了对生活的信心和希望。灵感枯竭，内心感到空虚。但星星的光芒并未消失——只是暂时被云层遮蔽。寻找微小而确实的美好。',
+    symbols: ['八角星', '七小星', '裸身女子', '两个水罐', '池水与草地']
+  },
+  {
+    num: 18, name: '月亮', nameEn: 'The Moon',
+    icon: '🌕', keyword: '幻象 · 潜意识',
+    scene: '一轮巨大的月亮高悬夜空，面容平静地俯视大地。月亮的左侧有新月、右侧有满月，显示月相的循环。两只狗和一只狼在对着月亮嚎叫。一条蜿蜒的小路穿过大地通向远方的银色双塔，水中一只龙虾/蝎子缓缓爬出。',
+    upright: '真相隐藏在幻象和恐惧的迷雾之后！你的潜意识正在浮现，带来了恐惧和不安，但也带来了深刻的启示。信任你的直觉，在不确定中保持耐心。并非一切都是表象所示。',
+    reversed: '恐惧正在消退，隐藏的真相开始显露！你可能终于看清了之前的幻象，或从自我欺骗中醒来。虽然过程不安，但你正在克服内心的恐惧。',
+    symbols: ['月亮（满月+新月）', '狗与狼', '龙虾', '蜿蜒小路', '银色双塔']
+  },
+  {
+    num: 19, name: '太阳', nameEn: 'The Sun',
+    icon: '☀️', keyword: '喜悦 · 成功',
+    scene: '一个赤裸的孩童骑在一匹强壮的白马上，张开双臂尽情拥抱温暖的阳光。巨大的太阳在天空中光芒万丈，光芒如雨般洒落。孩童头戴胜利的花环，身后飘扬着红色旗帜。背景中向日葵盛放。',
+    upright: '这是庆祝和喜悦的时刻！光明与温暖笼罩着你，成功和幸福就在眼前。保持纯真和热情，像孩子一样快乐地享受生命的美好。你值得所有的光芒！',
+    reversed: '暂时的挫折或缺乏热情让你感到低落。可能是过度乐观导致准备不足，或者内心的"内在小孩"需要被关注和疗愈。光明终会再现。',
+    symbols: ['巨型太阳', '白马孩童', '花环', '红色旗帜', '向日葵']
+  },
+  {
+    num: 20, name: '审判', nameEn: 'Judgement',
+    icon: '📯', keyword: '觉醒 · 召唤',
+    scene: '天使加百列在空中吹响金色的号角，号角上挂着白底红十字的旗帜。下方是大海上浮起的棺材，棺材中的人们——男人、女人和孩子——张开双臂，仰望天使，脸上满是觉悟和感恩的神情。远处的山脉静静注视。',
+    upright: '内心深处的召唤越来越清晰！这是觉醒和重生的时刻——你被召唤去回应你的使命，放下过去，接受更崇高的目标。宽恕自己和他人，拥抱新生。',
+    reversed: '你在抗拒内心的召唤！可能因为自我怀疑、害怕改变或不愿面对真相而迟迟不前。内心的审判让你苛责自己。试着放下评判，倾听那个温柔的呼唤。',
+    symbols: ['天使加百列', '金色号角', '红十字旗', '棺材中觉醒的人', '大海']
+  },
+  {
+    num: 21, name: '世界', nameEn: 'The World',
+    icon: '🌐', keyword: '圆满 · 完成',
+    scene: '一位赤裸的女子在绿色月桂花环中翩翩起舞，手中的两根权杖象征着世界的两极力量。花环呈椭圆形，四角分别有天使、鹰、牛、狮子——四活物各持一本书。背景是深蓝色的夜空和淡淡的云彩。',
+    upright: '圆满的完成！一个周期的完美终结，你已收获了全部的智慧和成长。这是一种深深的满足感、成就感以及与宇宙合一的感觉。庆祝你的旅程，为新的循环做好准备！',
+    reversed: '还有未完成的事情在等待你的关注。你可能接近终点但尚未抵达，或者在追求完美的路上停滞不前。检查还差最后一步什么，然后勇敢地走完它。',
+    symbols: ['月桂花环', '跳舞的女子', '四活物', '两根权杖', '深蓝夜空']
+  }
+];
+
+// ========== Render Cards ==========
+const grid = document.getElementById('major-grid');
+const cardDataMap = {};
+
+// ========== Helpers ==========
+function getCardColors(num) {
+  const hue = 220 + (num / 21) * 110;
+  return { hue, sat: 40 + (num % 7) * 3, lit: 18 + (num % 5) * 2 };
+}
+function toRoman(n) {
+  const r = ['0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI'];
+  return r[n] || n;
+}
+
+majorArcana.forEach((card, index) => {
+  const div = document.createElement('div');
+  div.className = 'card-item reveal';
+  const c = getCardColors(card.num);
+  const cornerHtml = card.num === 0
+    ? '<span class="card-corner top-left">0</span><span class="card-corner top-right">0</span><span class="card-corner bottom-left">0</span><span class="card-corner bottom-right">0</span>'
+    : '<span class="card-corner top-left">' + toRoman(card.num) + '</span><span class="card-corner top-right">' + toRoman(card.num) + '</span><span class="card-corner bottom-left">' + toRoman(card.num) + '</span><span class="card-corner bottom-right">' + toRoman(card.num) + '</span>';
+  div.innerHTML = '<div class="card-inner">'
+    + '<div class="card-front" style="background:linear-gradient(145deg, hsl(' + c.hue + ',' + c.sat + '%,' + c.lit + '%), hsl(' + (c.hue+20) + ',' + (c.sat-10) + '%,' + (c.lit-5) + '%));border-color:hsl(' + c.hue + ',' + (c.sat+10) + '%,' + (c.lit+15) + '%,0.3);">'
+    + cornerHtml
+    + '<div class="card-art" style="border-color:hsl(' + c.hue + ',' + (c.sat+20) + '%,' + (c.lit+30) + '%,0.2);">' + card.icon + '</div>'
+    + '<div class="card-number">大阿卡那 No.' + card.num + '</div>'
+    + '<div class="card-name">' + card.name + '</div>'
+    + '</div>'
+    + '<div class="card-back">'
+    + '<div class="card-keyword">' + card.keyword + '</div>'
+    + '<p>' + card.upright.split('！')[0] + '。</p>'
+    + '<div class="card-detail-link" style="margin-top:auto;font-size:0.65rem;color:#C9A96E;opacity:0.4;">点击查看详情 →</div>'
+    + '</div></div>';
+  div.addEventListener('click', function() {
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      if (div.classList.contains('flipped')) { openModal(index); }
+      else { div.classList.add('flipped'); }
+    } else { openModal(index); }
+  });
+  grid.appendChild(div);
+  cardDataMap[index] = card;
+});
+
+// ========== Modal Logic ==========
+const modal = document.getElementById('card-modal');
+const modalClose = document.getElementById('modal-close');
+
+function openModal(index) {
+  const card = majorArcana[index];
+  const c = getCardColors(card.num);
+  const iconEl = document.getElementById('m-icon');
+  iconEl.textContent = card.icon;
+  iconEl.style.background = 'linear-gradient(135deg, hsl(' + c.hue + ',' + c.sat + '%,' + (c.lit+8) + '%), hsl(' + (c.hue+20) + ',' + (c.sat-10) + '%,' + (c.lit-2) + '%))';
+  iconEl.style.borderColor = 'hsl(' + c.hue + ',' + (c.sat+20) + '%,' + (c.lit+30) + '%,0.3)';
+  document.getElementById('m-number').textContent = 'No. ' + card.num + ' · 大阿卡那';
+  document.getElementById('m-name').textContent = card.name;
+  document.getElementById('m-name-en').textContent = card.nameEn;
+  document.getElementById('m-scene').textContent = card.scene;
+
+  const symbolsContainer = document.getElementById('m-symbols');
+  symbolsContainer.innerHTML = '';
+  card.symbols.forEach(s => {
+    const tag = document.createElement('span');
+    tag.className = 'modal-tag';
+    tag.textContent = s;
+    symbolsContainer.appendChild(tag);
+  });
+
+  document.getElementById('m-upright').textContent = card.upright;
+  document.getElementById('m-reversed').textContent = card.reversed;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ========== Daily Draw Logic ==========
+const dailyBtn = document.getElementById('daily-draw-btn');
+const dailySection = document.getElementById('daily-result');
+const dailyClose = document.getElementById('daily-close');
+
+function getTodayStr() {
+  const d = new Date();
+  return d.getFullYear() + '-' + (d.getMonth()+1).toString().padStart(2,'0') + '-' + d.getDate().toString().padStart(2,'0');
+}
+
+function doDailyDraw() {
+  const today = getTodayStr();
+  const saved = localStorage.getItem('tarot-daily');
+  let cardIndex;
+
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      if (data.date === today) {
+        cardIndex = data.index;
+      } else {
+        cardIndex = Math.floor(Math.random() * majorArcana.length);
+        localStorage.setItem('tarot-daily', JSON.stringify({ date: today, index: cardIndex }));
+      }
+    } catch(e) {
+      cardIndex = Math.floor(Math.random() * majorArcana.length);
+      localStorage.setItem('tarot-daily', JSON.stringify({ date: today, index: cardIndex }));
+    }
+  } else {
+    cardIndex = Math.floor(Math.random() * majorArcana.length);
+    localStorage.setItem('tarot-daily', JSON.stringify({ date: today, index: cardIndex }));
+  }
+
+  const card = majorArcana[cardIndex];
+  document.getElementById('daily-date').textContent = today + ' · 今日指引';
+  document.getElementById('daily-icon').textContent = card.icon;
+  document.getElementById('daily-name').textContent = card.name;
+  document.getElementById('daily-keyword').textContent = '✦ ' + card.keyword + ' ✦';
+  document.getElementById('daily-msg').textContent = card.upright;
+
+  dailySection.classList.add('active');
+  dailySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+dailyBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  doDailyDraw();
+});
+
+dailyClose.addEventListener('click', (e) => {
+  e.preventDefault();
+  dailySection.classList.remove('active');
+});
+
+// ========== Stars Generation ==========
+const starsContainer = document.getElementById('stars');
+for (let i = 0; i < 120; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.setProperty('--duration', (2 + Math.random() * 4) + 's');
+  star.style.width = star.style.height = (1.5 + Math.random() * 2.5) + 'px';
+  star.style.animationDelay = Math.random() * 5 + 's';
+  starsContainer.appendChild(star);
+}
+
+// ========== Petals ==========
+function createPetal() {
+  const container = document.getElementById('petal-container');
+  const p = document.createElement('div');
+  p.className = 'petal';
+  var s = 2 + Math.random() * 3;
+  p.style.cssText = 'width:' + s + 'px;height:' + s + 'px;left:' + (Math.random() * 100) + '%;background:rgba(201,169,110,' + (0.015 + Math.random() * 0.025) + ');filter:blur(' + (1 + Math.random() * 2) + 'px);opacity:0;animation:particleDrift ' + (15 + Math.random() * 20) + 's linear forwards;';
+  if (!window._pKeyframes) {
+    window._pKeyframes = true;
+    var st = document.createElement('style');
+    st.textContent = '@keyframes particleDrift{0%{transform:translateY(0) translateX(0);opacity:0}15%{opacity:0.3}85%{opacity:0.05}100%{transform:translateY(calc(100vh + 30px)) translateX(' + (Math.random()*40-20) + 'px);opacity:0}}';
+    document.head.appendChild(st);
+  }
+  container.appendChild(p);
+  p.addEventListener('animationend', function() { p.remove(); });
+}
+setInterval(createPetal, 1000);
+for (var i = 0; i < 5; i++) setTimeout(createPetal, i * 400);
+
+// ========== Scroll Reveal ==========
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ========== Nav Active State ==========
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section, .hero');
+
+const navObserver = new IntersectionObserver((entries) => {
+  let activeId = '';
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      activeId = entry.target.id || 'hero';
+    }
+  });
+  if (activeId) {
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
+    });
+  }
+}, { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' });
+
+sections.forEach(s => navObserver.observe(s));
+
+// ========== Header Scroll Effect ==========
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 100);
+});
+</script>
+</body>
+</html>
